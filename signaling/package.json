@@ -1,0 +1,19 @@
+{
+  "name": "phonectrl-signaling",
+  "version": "1.0.0",
+  "description": "WebRTC signaling server for phoneCtrl (laptop ↔ phone SDP/ICE exchange)",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
