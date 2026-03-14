@@ -1,0 +1,25 @@
+# ── Laptop build artefacts ─────────────────────────────────────
+laptop/build/
+laptop/.cache/
+laptop/**/*.o
+laptop/**/*.obj
+laptop/**/*.pdb
+
+# ── Node.js signaling server ────────────────────────────────────
+signaling/node_modules/
+signaling/package-lock.json
+
+# ── Flutter / Dart ──────────────────────────────────────────────
+phone/.dart_tool/
+phone/.flutter-plugins
+phone/.flutter-plugins-dependencies
+phone/build/
+phone/android/.gradle/
+phone/android/app/build/
+phone/ios/Pods/
+phone/ios/.symlinks/
+
+# ── General ─────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log

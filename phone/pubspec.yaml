@@ -1,0 +1,36 @@
+name: phone_ctrl
+description: phoneCtrl — phone client that streams and controls a laptop screen.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # WebRTC for real-time video and data channels
+  flutter_webrtc: ^0.10.0
+
+  # WebSocket for signaling
+  web_socket_channel: ^2.4.0
+
+  # State management
+  provider: ^6.1.1
+
+  # Permissions (camera/mic not needed, but network is)
+  permission_handler: ^11.0.1
+
+  # Logging
+  logger: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
