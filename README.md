@@ -110,7 +110,7 @@ npm start
 
 ```powershell
 # From a Developer PowerShell for VS 2022
-vcpkg install ffmpeg boost-beast boost-asio
+vcpkg install ffmpeg[x264] boost-beast boost-asio
 ```
 
 #### Configure and build
@@ -122,6 +122,29 @@ cd laptop
 # or (if VCPKG_ROOT is set):
 #   $env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+cmake --build build --config Release
+```
+
+If CMake says it cannot find the toolchain file, verify `VCPKG_ROOT` first:
+
+```powershell
+echo $env:VCPKG_ROOT
+Test-Path "$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+```
+
+If `VCPKG_ROOT` is empty, set it for the current shell:
+
+```powershell
+$env:VCPKG_ROOT="C:/src/vcpkg"  # change to your actual vcpkg path
+```
+
+If the host starts but prints `[encoder] Initialisation failed`, your FFmpeg
+build likely lacks an H.264 encoder (`libx264` or `libopenh264`). Ensure you
+installed `ffmpeg[x264]` (shown above), then rebuild:
+
+```powershell
+vcpkg install ffmpeg[x264]
+cmake -B build -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
 cmake --build build --config Release
 ```
 
@@ -155,9 +178,14 @@ $env:VCPKG_ROOT="C:/src/vcpkg"  # change to your actual vcpkg path
 
 ```bash
 cd phone
+flutter --version
 flutter pub get
 flutter run
 ```
+
+If `flutter` is not recognized on Windows, install Flutter SDK and add
+`<flutter-sdk>\bin` to your `PATH`, then open a new terminal and rerun
+`flutter --version`.
 
 Enter your **laptop's local IP address** and port `8080` on the connect screen.
 

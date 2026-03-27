@@ -81,6 +81,10 @@ public:
 
     /// Returns true if init() completed successfully.
     bool isInitialised() const;
+    /// Returns the codec name that was successfully opened (empty if uninitialised).
+    std::string activeCodec() const;
+    /// Returns the most recent initialisation error message.
+    std::string lastError() const;
 
 private:
     struct Impl;
