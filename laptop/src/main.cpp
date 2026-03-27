@@ -127,19 +127,26 @@ int main(int argc, char* argv[])
 
     // ── Screen capture ────────────────────────────────────────────────────────
     phonectrl::capture::ScreenCapture capture;
+    bool encoderInitFailed = false;
 
     capture.setFrameCallback([&](const phonectrl::capture::Frame& frame) {
+        if (encoderInitFailed) return;
+
         // Lazy-init encoder once we know the real screen dimensions
         if (!encoder.isInitialised()) {
             if (!encoder.init(frame.width, frame.height, cfg.fps, cfg.bitrate)) {
-                std::cerr << "[encoder] Initialisation failed\n";
+                encoderInitFailed = true;
+                std::cerr << "[encoder] Initialisation failed: " << encoder.lastError() << "\n"
+                          << "[encoder] Install an FFmpeg H.264 encoder (e.g. libx264 or libopenh264), "
+                             "or rebuild FFmpeg with H.264 encoding enabled.\n";
                 return;
             }
             // Tell the input handler the screen resolution for coordinate mapping
             inputHandler.setScreenDimensions(frame.width, frame.height);
             std::cout << "[encoder] Initialised: "
                       << frame.width << "x" << frame.height
-                      << " @ " << cfg.fps << " fps\n";
+                      << " @ " << cfg.fps << " fps"
+                      << " (codec=" << encoder.activeCodec() << ")\n";
         }
 
         // Only encode when at least one client is connected

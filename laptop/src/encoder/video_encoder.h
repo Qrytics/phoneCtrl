@@ -28,7 +28,7 @@ using PacketCallback = std::function<void(const EncodedPacket&)>;
  * Usage:
  *   VideoEncoder enc;
  *   enc.setPacketCallback([](const EncodedPacket& p){ server.send(p.data); });
- *   enc.init(1920, 1080, 60 /* fps */);
+ *   enc.init(1920, 1080, 60); // fps
  *   // inside capture callback:
  *   enc.encodeFrame(frame.data.data(), frame.width, frame.height, frame.stride);
  *   enc.flush();
@@ -81,6 +81,10 @@ public:
 
     /// Returns true if init() completed successfully.
     bool isInitialised() const;
+    /// Returns the codec name that was successfully opened (empty if uninitialised).
+    std::string activeCodec() const;
+    /// Returns the most recent initialisation error message.
+    std::string lastError() const;
 
 private:
     struct Impl;
