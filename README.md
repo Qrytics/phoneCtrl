@@ -148,6 +148,19 @@ cmake -B build -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpk
 cmake --build build --config Release
 ```
 
+If CMake says it cannot find the toolchain file, verify `VCPKG_ROOT` first:
+
+```powershell
+echo $env:VCPKG_ROOT
+Test-Path "$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+```
+
+If `VCPKG_ROOT` is empty, set it for the current shell:
+
+```powershell
+$env:VCPKG_ROOT="C:/src/vcpkg"  # change to your actual vcpkg path
+```
+
 #### Run
 
 ```powershell
