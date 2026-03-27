@@ -33,7 +33,7 @@ using FrameCallback = std::function<void(const Frame&)>;
  *
  * Usage:
  *   ScreenCapture cap;
- *   cap.setFrameCallback([](const Frame& f){ /* encode f */ });
+ *   cap.setFrameCallback([](const Frame& f){ encodeFrame(f); });
  *   cap.start();
  *   // ... run event loop ...
  *   cap.stop();
