@@ -28,7 +28,7 @@ using PacketCallback = std::function<void(const EncodedPacket&)>;
  * Usage:
  *   VideoEncoder enc;
  *   enc.setPacketCallback([](const EncodedPacket& p){ server.send(p.data); });
- *   enc.init(1920, 1080, 60 /* fps */);
+ *   enc.init(1920, 1080, 60); // fps
  *   // inside capture callback:
  *   enc.encodeFrame(frame.data.data(), frame.width, frame.height, frame.stride);
  *   enc.flush();
